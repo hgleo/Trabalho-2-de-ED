@@ -118,18 +118,18 @@ int existir(arvore *a, int x){
 
 }
 
-void imprimirMenores(arvore *a, int x){
+void imprimirFolhasMenores(arvore *a, int x){
 
   if(a != NULL){
-    if(a->info < x){
+    if(a->dir == NULL && a->esq == NULL && a->info < x)
       printf("%d ", a->info);
-      imprimirMenores(a->esq,x);
-      imprimirMenores(a->dir,x);
-    }
-    else
-      imprimirMenores(a->esq,x);
-  }
+  
+  imprimirFolhasMenores(a->esq, x);
+  imprimirFolhasMenores(a->dir, x);
 }
+}
+
+//FALTA DEIXAR ELA COM APROVEITAMENTO MAXIMO
 
 int procurarElemento(arvore *a, int x){
 
@@ -143,6 +143,8 @@ int procurarElemento(arvore *a, int x){
         return procurarElemento(a->esq, x) || procurarElemento(a->dir, x);
     }
 }
+
+//FALTA DEIXAR ELA COM APROVEITAMENTO MAXIMO
 
 int nivelDoNo(arvore *a, int x, int nivel){
 
@@ -227,22 +229,21 @@ void freeArvore(arvore *a) {
 
 int main(){
   
-  int opcao, elemento, nivel;
+  int opcao, elemento, nivel, opcao2;
   char nomeArq[50]; 
   arvore *a = NULL;
   FILE *arq = NULL;
 
   do{
-    printf("\nMENU:\n");
-    printf("1 - Ler uma arvore de um arquivo fornecido pelo usuario\n");
-    printf("2 - Imprimir a arvore (pre-ordem, em-ordem, pos-ordem, largura)\n");
-    printf("3 - Verificar se um elemento x existe na arvore\n");
-    printf("4 - Imprimir o nivel de um no x\n");
-    printf("5 - Imprimir valores menores que x\n");
-    printf("6 - Inserir um no x na arvore\n");
-    printf("7 - Remover um no x na arvore\n");
-    printf("8 - Sair\n");
-
+    printf("===============================MENU===============================\n\n");
+    printf("[1] Ler uma arvore de um arquivo fornecido pelo usuario\n");
+    printf("[2] Imprimir a arvore (pre-ordem, em-ordem, pos-ordem, largura)\n");
+    printf("[3] Verificar se um elemento x existe na arvore\n");
+    printf("[4] Imprimir o nivel de um no x\n");
+    printf("[5] Imprimir folhas menores que x\n");
+    printf("[6] Inserir um no x na arvore\n");
+    printf("[7] Remover um no x na arvore\n");
+    printf("[8] Sair\n");
     printf("\nDigite a opcao: ");
     scanf("%d",&opcao);
 
@@ -263,15 +264,29 @@ int main(){
         break;
 
       case 2:
-        printf("\narvore em pre-ordem: ");
-        imprimirPreOrdem(a);
-        printf("\narvore em em-ordem: ");
-        imprimirEmOrdem(a);
-        printf("\narvore em pos-ordem: ");
-        imprimirPosOrdem(a);
-        printf("\narvore em largura: ");
-        imprimirEmLargura(a);
-        printf("\n");
+        printf("\n[1] Imprimir Pre-Ordem\n[2] Imprimir Em Ordem\n[3] Imprimir Pos Ordem\n[4] Imprimir em Largura\n");
+        scanf("%d", &opcao2);
+        switch(opcao2){
+          case 1:
+            imprimirPreOrdem(a);
+            printf("\n");
+            break;
+          case 2:
+            imprimirEmOrdem(a);
+            printf("\n");
+            break;
+          case 3:
+            imprimirPosOrdem(a);
+            printf("\n");
+            break;
+          case 4:
+            imprimirEmLargura(a);
+            printf("\n");
+            break;
+          default:
+            printf("Opção Invalida!\n");
+            break;
+        }
         break;
 
       case 3:
@@ -297,7 +312,7 @@ int main(){
         printf("\nDigite o valor de referencia para imprimir menores: ");
         scanf("%d",&elemento);
         printf("Os valores menores que %d sao: ",elemento);
-        imprimirMenores(a,elemento);
+        imprimirFolhasMenores(a,elemento);
         printf("\n");
         break;
 
@@ -318,7 +333,6 @@ int main(){
       case 8:
         printf("\nSaindo...\n");
         break;
-
       default:
         printf("\nOpcao invalida!\n");
     }
