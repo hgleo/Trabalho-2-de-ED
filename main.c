@@ -1,18 +1,18 @@
 /*
-  Implemente um prorama que apresente na tela o seguinte menu de opções: 
-  1 - Ler uma árvore de um araquivo fornecido pelo usuário        ok
-  2 - Imprimir a árvore (pré-ordem,em-ordem,pós-ordem,largura)    ok
-  3 - Verificar se um elemento x existe na árvore                 ok
-  4 - Imprimir o nível de um nó x                                 ok
+  Implemente um prorama que apresente na tela o seguinte menu de opï¿½ï¿½es: 
+  1 - Ler uma arvore de um araquivo fornecido pelo usuario        ok
+  2 - Imprimir a arvore (pre-ordem,em-ordem,pos-ordem,largura)    ok
+  3 - Verificar se um elemento x existe na arvore                 ok
+  4 - Imprimir o nivel de um no x                                 ok
   5 - Imprimir valores menor que x                                ok
-  6 - Inserir um nó x na árvore
-  7 - Remover um nó x na árvore
+  6 - Inserir um no x na arvore                                   ok
+  7 - Remover um no x na arvore                                   ok
   8 - Sair                                                        ok
 */
 
 #include "stdio.h"
 #include "stdlib.h"
-#include "locale.h"
+
 
 typedef struct arvore{
 
@@ -124,7 +124,7 @@ void imprimirMenores(arvore *a, int x){
 
   if(a != NULL){
     if(a->info < x){
-      printf("%d", a->info);
+      printf("%d ", a->info);
       imprimirMenores(a->esq,x);
       imprimirMenores(a->dir,x);
     }
@@ -215,12 +215,12 @@ if(a->esq == NULL && a->dir == NULL){ //caso 1: folha
 free(a);
 a = NULL;
 }
-else if(a->esq == NULL){ //caso 2: só tem filho a direita
+else if(a->esq == NULL){ //caso 2: so tem filho a direita
 arvore *temp = a;
 a = a->dir;
 free(temp);
 }
-else if(a->dir == NULL){ //caso 2: só tem filho a esquerda
+else if(a->dir == NULL){ //caso 2: so tem filho a esquerda
 arvore *temp = a;
 a = a->esq;
 free(temp);
@@ -232,7 +232,7 @@ temp = temp->dir;
 }
 a->info = temp->info; //copia o valor maximo da esquerda para o no que queremos remover
 temp->info = x; //troca o valor que queremos remover pelo valor maximo da esquerda
-a->esq = remover(a->esq, x); //remove o valor trocado (que agora está na esquerda)
+a->esq = remover(a->esq, x); //remove o valor trocado (que agora esta na esquerda)
 }
 }
 return a;
@@ -248,7 +248,7 @@ void freeArvore(arvore *a) {
 }
 
 int main(){
-  setlocale(LC_ALL,"Portuguese");
+  
   int opcao, elemento, nivel;
   char nomeArq[50]; 
   arvore *a = NULL;
@@ -256,16 +256,16 @@ int main(){
 
   do{
     printf("\nMENU:\n");
-    printf("1 - Ler uma árvore de um arquivo fornecido pelo usuário\n");
-    printf("2 - Imprimir a árvore (pré-ordem, em-ordem, pós-ordem, largura)\n");
-    printf("3 - Verificar se um elemento x existe na árvore\n");
-    printf("4 - Imprimir o nível de um nó x\n");
+    printf("1 - Ler uma arvore de um arquivo fornecido pelo usuario\n");
+    printf("2 - Imprimir a arvore (pre-ordem, em-ordem, pos-ordem, largura)\n");
+    printf("3 - Verificar se um elemento x existe na arvore\n");
+    printf("4 - Imprimir o nivel de um no x\n");
     printf("5 - Imprimir valores menores que x\n");
-    printf("6 - Inserir um nó x na árvore\n");
-    printf("7 - Remover um nó x na árvore\n");
+    printf("6 - Inserir um no x na arvore\n");
+    printf("7 - Remover um no x na arvore\n");
     printf("8 - Sair\n");
 
-    printf("\nDigite a opção: ");
+    printf("\nDigite a opcao: ");
     scanf("%d",&opcao);
 
     switch(opcao){
@@ -285,13 +285,13 @@ int main(){
         break;
 
       case 2:
-        printf("\nÁrvore em pré-ordem: ");
+        printf("\narvore em pre-ordem: ");
         imprimirPreOrdem(a);
-        printf("\nÁrvore em em-ordem: ");
+        printf("\narvore em em-ordem: ");
         imprimirEmOrdem(a);
-        printf("\nÁrvore em pós-ordem: ");
+        printf("\narvore em pos-ordem: ");
         imprimirPosOrdem(a);
-        printf("\nÁrvore em largura: ");
+        printf("\narvore em largura: ");
         imprimirEmLargura(a);
         printf("\n");
         break;
@@ -300,25 +300,25 @@ int main(){
         printf("\nDigite o elemento a ser procurado: ");
         scanf("%d",&elemento);
         if(existir(a,elemento))
-          printf("O elemento %d está na árvore.\n",elemento);
+          printf("O elemento %d esta na arvore.\n",elemento);
         else  
-          printf("O elemento %d não está na árvore.\n",elemento);
+          printf("O elemento %d nao esta na arvore.\n",elemento);
         break;
 
       case 4:
-        printf("\nDigite o elemento para saber o nível: ");
+        printf("\nDigite o elemento para saber o nivel: ");
         scanf("%d",&elemento);
         nivel = nivelDoNo(a, elemento, 0);
         if(nivel == -1)
-          printf("O elemento %d não está na árvore.\n",elemento);
+          printf("O elemento %d no esta na arvore.\n",elemento);
         else
-          printf("O nível do elemento %d é %d.\n",elemento,nivel);
+          printf("O nivel do elemento %d e %d.\n",elemento,nivel);
         break;
 
       case 5:
-        printf("\nDigite o valor de referência para imprimir menores: ");
+        printf("\nDigite o valor de referencia para imprimir menores: ");
         scanf("%d",&elemento);
-        printf("Os valores menores que %d são: ",elemento);
+        printf("Os valores menores que %d sao: ",elemento);
         imprimirMenores(a,elemento);
         printf("\n");
         break;
@@ -327,14 +327,14 @@ int main(){
         printf("\nDigite o elemento a ser inserido: ");
         scanf("%d",&elemento);
         a = inserir(a,elemento);
-        printf("O elemento %d foi inserido na árvore.\n",elemento);
+        printf("O elemento %d foi inserido na arvore.\n",elemento);
         break;
 
       case 7:
         printf("\nDigite o elemento a ser removido: ");
         scanf("%d",&elemento);
         a = remover(a,elemento);
-        printf("O elemento %d foi removido da árvore.\n",elemento);
+        printf("O elemento %d foi removido da arvore.\n",elemento);
         break;
 
       case 8:
@@ -342,7 +342,7 @@ int main(){
         break;
 
       default:
-        printf("\nOpção inválida!\n");
+        printf("\nOpcao invalida!\n");
     }
   }while(opcao != 8);
 
