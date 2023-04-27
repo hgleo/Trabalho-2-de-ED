@@ -1,17 +1,18 @@
 /*
-  Implemente um prorama que apresente na tela o seguinte menu de op√ß√µes: 
-  1 - Ler uma √°rvore de um araquivo fornecido pelo usu√°rio        ok
-  2 - Imprimir a √°rvore (pr√©-ordem,em-ordem,p√≥s-ordem,largura)    ok
-  3 - Verificar se um elemento x existe na √°rvore                 ok
-  4 - Imprimir o n√≠vel de um n√≥ x                                 ok
+  Implemente um prorama que apresente na tela o seguinte menu de opÁıes: 
+  1 - Ler uma ·rvore de um araquivo fornecido pelo usu·rio        ok
+  2 - Imprimir a ·rvore (prÈ-ordem,em-ordem,pÛs-ordem,largura)    ok
+  3 - Verificar se um elemento x existe na ·rvore                 ok
+  4 - Imprimir o nÌvel de um nÛ x                                 ok
   5 - Imprimir valores menor que x                                ok
-  6 - Inserir um n√≥ x na √°rvore
-  7 - Remover um n√≥ x na √°rvore
+  6 - Inserir um nÛ x na ·rvore
+  7 - Remover um nÛ x na ·rvore
   8 - Sair                                                        ok
 */
 
-#include<stdio.h>
-#include<stdlib.h>
+#include "stdio.h"
+#include "stdlib.h"
+#include "locale.h"
 
 typedef struct arvore{
 
@@ -214,12 +215,12 @@ if(a->esq == NULL && a->dir == NULL){ //caso 1: folha
 free(a);
 a = NULL;
 }
-else if(a->esq == NULL){ //caso 2: s√≥ tem filho a direita
+else if(a->esq == NULL){ //caso 2: sÛ tem filho a direita
 arvore *temp = a;
 a = a->dir;
 free(temp);
 }
-else if(a->dir == NULL){ //caso 2: s√≥ tem filho a esquerda
+else if(a->dir == NULL){ //caso 2: sÛ tem filho a esquerda
 arvore *temp = a;
 a = a->esq;
 free(temp);
@@ -231,7 +232,7 @@ temp = temp->dir;
 }
 a->info = temp->info; //copia o valor maximo da esquerda para o no que queremos remover
 temp->info = x; //troca o valor que queremos remover pelo valor maximo da esquerda
-a->esq = remover(a->esq, x); //remove o valor trocado (que agora est√° na esquerda)
+a->esq = remover(a->esq, x); //remove o valor trocado (que agora est· na esquerda)
 }
 }
 return a;
@@ -247,23 +248,24 @@ void freeArvore(arvore *a) {
 }
 
 int main(){
-int opcao, elemento, nivel;
-char nomeArq[50]; 
-arvore *a = NULL;
-FILE *arq = NULL;
+  setlocale(LC_ALL,"Portuguese");
+  int opcao, elemento, nivel;
+  char nomeArq[50]; 
+  arvore *a = NULL;
+  FILE *arq = NULL;
 
   do{
     printf("\nMENU:\n");
-    printf("1 - Ler uma √°rvore de um arquivo fornecido pelo usu√°rio\n");
-    printf("2 - Imprimir a √°rvore (pr√©-ordem, em-ordem, p√≥s-ordem, largura)\n");
-    printf("3 - Verificar se um elemento x existe na √°rvore\n");
-    printf("4 - Imprimir o n√≠vel de um n√≥ x\n");
+    printf("1 - Ler uma ·rvore de um arquivo fornecido pelo usu·rio\n");
+    printf("2 - Imprimir a ·rvore (prÈ-ordem, em-ordem, pÛs-ordem, largura)\n");
+    printf("3 - Verificar se um elemento x existe na ·rvore\n");
+    printf("4 - Imprimir o nÌvel de um nÛ x\n");
     printf("5 - Imprimir valores menores que x\n");
-    printf("6 - Inserir um n√≥ x na √°rvore\n");
-    printf("7 - Remover um n√≥ x na √°rvore\n");
+    printf("6 - Inserir um nÛ x na ·rvore\n");
+    printf("7 - Remover um nÛ x na ·rvore\n");
     printf("8 - Sair\n");
 
-    printf("\nDigite a op√ß√£o: ");
+    printf("\nDigite a opÁ„o: ");
     scanf("%d",&opcao);
 
     switch(opcao){
@@ -283,13 +285,13 @@ FILE *arq = NULL;
         break;
 
       case 2:
-        printf("\n√Årvore em pr√©-ordem: ");
+        printf("\n¡rvore em prÈ-ordem: ");
         imprimirPreOrdem(a);
-        printf("\n√Årvore em em-ordem: ");
+        printf("\n¡rvore em em-ordem: ");
         imprimirEmOrdem(a);
-        printf("\n√Årvore em p√≥s-ordem: ");
+        printf("\n¡rvore em pÛs-ordem: ");
         imprimirPosOrdem(a);
-        printf("\n√Årvore em largura: ");
+        printf("\n¡rvore em largura: ");
         imprimirEmLargura(a);
         printf("\n");
         break;
@@ -298,25 +300,25 @@ FILE *arq = NULL;
         printf("\nDigite o elemento a ser procurado: ");
         scanf("%d",&elemento);
         if(existir(a,elemento))
-          printf("O elemento %d est√° na √°rvore.\n",elemento);
+          printf("O elemento %d est· na ·rvore.\n",elemento);
         else  
-          printf("O elemento %d n√£o est√° na √°rvore.\n",elemento);
+          printf("O elemento %d n„o est· na ·rvore.\n",elemento);
         break;
 
       case 4:
-        printf("\nDigite o elemento para saber o n√≠vel: ");
+        printf("\nDigite o elemento para saber o nÌvel: ");
         scanf("%d",&elemento);
         nivel = nivelDoNo(a, elemento, 0);
         if(nivel == -1)
-          printf("O elemento %d n√£o est√° na √°rvore.\n",elemento);
+          printf("O elemento %d n„o est· na ·rvore.\n",elemento);
         else
-          printf("O n√≠vel do elemento %d √© %d.\n",elemento,nivel);
+          printf("O nÌvel do elemento %d È %d.\n",elemento,nivel);
         break;
 
       case 5:
-        printf("\nDigite o valor de refer√™ncia para imprimir menores: ");
+        printf("\nDigite o valor de referÍncia para imprimir menores: ");
         scanf("%d",&elemento);
-        printf("Os valores menores que %d s√£o: ",elemento);
+        printf("Os valores menores que %d s„o: ",elemento);
         imprimirMenores(a,elemento);
         printf("\n");
         break;
@@ -325,14 +327,14 @@ FILE *arq = NULL;
         printf("\nDigite o elemento a ser inserido: ");
         scanf("%d",&elemento);
         a = inserir(a,elemento);
-        printf("O elemento %d foi inserido na √°rvore.\n",elemento);
+        printf("O elemento %d foi inserido na ·rvore.\n",elemento);
         break;
 
       case 7:
         printf("\nDigite o elemento a ser removido: ");
         scanf("%d",&elemento);
         a = remover(a,elemento);
-        printf("O elemento %d foi removido da √°rvore.\n",elemento);
+        printf("O elemento %d foi removido da ·rvore.\n",elemento);
         break;
 
       case 8:
@@ -340,7 +342,7 @@ FILE *arq = NULL;
         break;
 
       default:
-        printf("\nOp√ß√£o inv√°lida!\n");
+        printf("\nOpÁ„o inv·lida!\n");
     }
   }while(opcao != 8);
 
