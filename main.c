@@ -4,7 +4,7 @@
   2 - Imprimir a arvore (pre-ordem,em-ordem,pos-ordem,largura)    ok
   3 - Verificar se um elemento x existe na arvore                 ok
   4 - Imprimir o nivel de um no x                                 ok
-  5 - Imprimir valores menor que x                                ok
+  5 - Imprimir folhas menor que x                                ok
   6 - Inserir um no x na arvore                                   ok
   7 - Remover um no x na arvore                                   ok
   8 - Sair                                                        ok
@@ -94,7 +94,6 @@ void imprimirNivel(arvore *a, int cont, int n){
   }
 }
 
-
 void imprimirEmLargura(arvore *a){
 
   int h = altura(a);
@@ -102,7 +101,6 @@ void imprimirEmLargura(arvore *a){
     imprimirNivel(a, 1, i);
   }
 }
-
 
 int existir(arvore *a, int x){
 
@@ -133,17 +131,6 @@ void imprimirMenores(arvore *a, int x){
   }
 }
 
-void imprimirFolhas(arvore *a){
-
-  if(a != NULL){
-    if(a->dir == NULL && a->esq == NULL)
-      printf("%d ", a->info);
-  
-  imprimirFolhas(a->esq);
-  imprimirFolhas(a->dir);
-}
-}
-
 int procurarElemento(arvore *a, int x){
 
     if(a == NULL){
@@ -155,15 +142,6 @@ int procurarElemento(arvore *a, int x){
     else{
         return procurarElemento(a->esq, x) || procurarElemento(a->dir, x);
     }
-}
-
-int contarElementos(arvore *a){
-
-  if(a == NULL){
-    return 0;
-  }
-  else
-    return 1 + contarElementos(a->esq) + contarElementos(a->dir);
 }
 
 int nivelDoNo(arvore *a, int x, int nivel){
