@@ -140,9 +140,9 @@ int nivelDoNo(arvore *a, int x, int nivel){
 
   if(a == NULL) return -1; //menos 1, porque nesse caso o nivel pode ser 0
   else if(a->info == x) return nivel;
-  else if(x < a->info) return nivelDoNo(a->esq, x, nivel+1);
-  else return nivelDoNo(a->dir, x, nivel+1);
-}
+  else if(x < a->info) return nivelDoNo(a->esq, x, nivel+1); //procura na esquerda caso seja menor que x, somando um ao nivel
+  else return nivelDoNo(a->dir, x, nivel+1); //procura na direita caso nao esteja na esquerda, somando um ao nivel
+} 
 
 arvore *inserir(arvore *a, int x){
 
