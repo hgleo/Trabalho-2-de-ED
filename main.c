@@ -129,35 +129,19 @@ void imprimirFolhasMenores(arvore *a, int x){
 }
 }
 
-//FALTA DEIXAR ELA COM APROVEITAMENTO MAXIMO
-
 int procurarElemento(arvore *a, int x){
-
-    if(a == NULL){
-        return 0;
-    }
-    else if(a->info == x){
-        return 1;
-    }
-    else{
-        return procurarElemento(a->esq, x) || procurarElemento(a->dir, x);
-    }
+    if(a == NULL) return 0;
+    else if(a->info == x) return 1;
+    else if(x < a->info) return procurarElemento(a->esq, x);
+    else return procurarElemento(a->dir, x);
 }
-
-//FALTA DEIXAR ELA COM APROVEITAMENTO MAXIMO
 
 int nivelDoNo(arvore *a, int x, int nivel){
 
   if(a == NULL) return -1; //menos 1, porque nesse caso o nivel pode ser 0
-
-  if(a->info == x) return nivel;
-
-  int nivel1 = nivelDoNo(a->esq, x, nivel+1);
-  if(nivel1 == -1){ //se nao estiver na esquerda procura na direita
-    nivel1 = nivelDoNo(a->dir, x, nivel+1);
-  }
-
-  return nivel1;
+  else if(a->info == x) return nivel;
+  else if(x < a->info) return nivelDoNo(a->esq, x, nivel+1);
+  else return nivelDoNo(a->dir, x, nivel+1);
 }
 
 arvore *inserir(arvore *a, int x){
