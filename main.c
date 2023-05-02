@@ -7,7 +7,9 @@
   5 - Imprimir folhas menor que x                                ok
   6 - Inserir um no x na arvore                                   ok
   7 - Remover um no x na arvore                                   ok
-  8 - Sair                                                        ok
+  8 - Sair
+  
+  Feito por Hugo Melo e Felipe Alves                                                        ok
 */
 
 #include "stdio.h"
